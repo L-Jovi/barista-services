@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import json
-from flask import Flask, request, render_template, make_response
+from flask import Flask, request, render_template, make_response, jsonify
 from saber.dbs.db_mysql import Db_mysql
 
 app = Flask(__name__)
@@ -27,14 +27,28 @@ def post_info():
     val = request.form['foo']
     return db_mysql.get_multi(val)
 
-@app.route('/download', methods=['GET'])
-def get_js():
-    with open('static/demo.js') as f:
+@app.route('/test/patch', methods=['GET'])
+def get_test_patch():
+    with open('static/static/demo.js') as f:
         content = f.read()
         
     response = make_response(content)
     response.headers["Content-Disposition"] = "attachment; filename=demo.js"
     return response
+
+@app.route('/sdk/patch/info', methods=['GET'])
+def get_patch_info():
+    with open('static/patch/Tyrantdb-iOS/patch.json') as f:
+        content_json = json.loads(f.read())
+    response = jsonify(content_json)
+    return response
+
+@app.route('/sdk/patch/resource/<filename>', methods=['GET'])
+def get_patch_src(filename):
+    with open('static/patch/Tyrantdb-iOS/{}.{}'.format(filename, 'js')) as f:
+        response = f.read();
+    return response
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

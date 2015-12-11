@@ -1,0 +1,5 @@
+{
+  "remotePatchSrcBaseUrl": "http://172.26.129.189:5000/sdk/patch/resource/",
+  "version": "0.0.1",
+  "remotePatchInfoUrl": "http://172.26.129.189:5000/sdk/patch/info"
+}

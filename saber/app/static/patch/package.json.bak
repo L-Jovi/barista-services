@@ -1,0 +1,26 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "simple multi thread chat boxed",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/L-Jovi/pra_nodejs-chat.git"
+  },
+  "keywords": [
+    "chat"
+  ],
+  "author": "nswbmw, jovi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/L-Jovi/pra_nodejs-chat/issues"
+  },
+  "homepage": "https://github.com/L-Jovi/pra_nodejs-chat#readme",
+  "devDependencies": {
+    "express": "^4.13.3",
+    "socket.io": "^1.3.7"
+  }
+}
