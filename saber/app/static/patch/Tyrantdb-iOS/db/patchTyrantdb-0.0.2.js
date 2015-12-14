@@ -39,7 +39,7 @@ var utils = {
 
 
 defineClass('Tyrantdb', {
-    setAccountJs_module_catogery_debug: function(account, module, catogery, debug) {
+    setAccount_module_catogery_debug: function(account, module, catogery, debug) {
         /* args mapping type below */
         var jsAccount = account.toJS();
         var jsModule = module.toJS();
@@ -78,27 +78,7 @@ defineClass('Tyrantdb', {
         return true;
     },
 
-    foo_bar_sth_happend: function(foo, bar, sth, happend) {
-        console.log('🐱 🐱 🐱 🐱 ');
-
-        foo = foo.toJS();
-        bar = bar.toJS();
-        sth = sth.toJS();
-        happend = happend.toJS();
-
-        var data = {
-            foo: foo,
-            bar: bar,
-            sth: sth,
-            happend, happend
-        }
-
-        return data;
-    },
-
     event_setProperties_setIp_setTimestamp: function(name, properties, ip, timestamp) {
-        console.log('🚩 🚩 🚩 🚩  enter [event] JSPatch logic');
-
         var jsName = name.toJS();
         var jsProperties = properties.toJS();
         var jsIp = ip.toJS();
@@ -120,11 +100,6 @@ defineClass('Tyrantdb', {
             return false;
         }
 
-        // var dictionary = NSMutableDictionary.alloc().init();
-        // dictionary.setObject_forKey(_jsIdentify, 'identify');
-        // dictionary.setObject_forKey(_jsIdentify, 'identify');
-        // dictionary.setObject_forKey(_jsIdentify, 'identify');
-
         var data = {
             identify: _jsIdentify,
             index: _jsIndex,
@@ -145,13 +120,14 @@ defineClass('Tyrantdb', {
             data['module'] = _jsModule;
         }
 
-        console.log('🔥 ');
         self.sendTyrantdb_api(data, "event");
 
         return data;
     },
 
     sendTyrantdbJs_api: function(data, api) {
+        console.log(' 🚩  enter JSPatch [sendTyrantdbJs_api]');
+
         // I use origin [data] with suitable oc type
         var _jsErrorCount = utils['getter'](self, '_errorCount', 'default');
         var jsApi = api.toJS();
@@ -190,8 +166,6 @@ defineClass('Tyrantdb', {
     },
 
     identify_setProperties_setIp_setTimestamp: function(identify, properties, ip, timestamp) {
-        console.log('🚩  enter [identify] JSPatch logic');
-
         var jsIdentify = identify.toJS();
         var jsProperties = properties.toJS();
         var jsIp = ip.toJS();
@@ -257,7 +231,7 @@ defineClass('Tyrantdb', {
     },
 
     blockedSend: function(sendInfo) {
-        console.log('🚩  enter [blockedSend] JSPatch logic');
+        console.log(' 👉  version 0.0.2 👈 ');
 
         // in view of aiming at oc type [NSMutableURLRequest] make no sense with [toJS()]
         // here I retain origin variable
@@ -283,33 +257,5 @@ defineClass('Tyrantdb', {
         }
 
         return true;
-    }
-});
-
-
-defineClass('TyrantdbGameTracker', {}, {
-    testQueueJs_channel_debug_delegate: function(appId, channel, debug, delegate) {
-        /* set _queue */
-        _queue = NSOperationQueue.alloc().init();
-        _queue.setMaxConcurrentOperationCount(1);
-        _queue.addOperation(NSInvocationOperation.alloc().initWithTarget_selector_object(delegate, 'onStartOperation', null));
-
-        NSNotificationCenter.defaultCenter().addObserver_selector_name_object(delegate, "enterBackgroundOperation", "UIApplicationDidEnterBackgroundNotification", null);
-        
-        console.log('👉  out TyrantdbGameTracker in js logic 👈  ');
-        console.log('👉  version 0.0.3 👈  ');
-    },
-
-    setUserJs_userType_userSex_userAge_userName: function(userId, userType, userSex, userAge, userName) {
-        console.log('🚩  enter [setUser] JSPatch logic');
-        return {};
-    },
-
-    setLevel: function(level) {
-        console.log('🚩  enter [setLevel] JSPatch logic');
-
-        var _jsTyrantdbUser = TyrantdbGameTracker.__tyrantdbUser();
-
-        return;
     }
 });

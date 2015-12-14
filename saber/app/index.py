@@ -36,19 +36,32 @@ def get_test_patch():
     response.headers["Content-Disposition"] = "attachment; filename=demo.js"
     return response
 
-@app.route('/sdk/patch/info', methods=['GET'])
-def get_patch_info():
-    with open('static/patch/Tyrantdb-iOS/patch.json') as f:
+
+@app.route('/sdk/db/patch/info', methods=['GET'])
+def get_patch_db_info():
+    with open('static/patch/Tyrantdb-iOS/db/patch.json') as f:
         content_json = json.loads(f.read())
     response = jsonify(content_json)
     return response
 
-@app.route('/sdk/patch/resource/<filename>', methods=['GET'])
-def get_patch_src(filename):
-    with open('static/patch/Tyrantdb-iOS/{}.{}'.format(filename, 'js')) as f:
+@app.route('/sdk/db/patch/resource/<filename>', methods=['GET'])
+def get_patch_db_src(filename):
+    with open('static/patch/Tyrantdb-iOS/db/{}.{}'.format(filename, 'js')) as f:
         response = f.read();
     return response
 
+@app.route('/sdk/game/patch/info', methods=['GET'])
+def get_patch_game_info():
+    with open('static/patch/Tyrantdb-iOS/game/patch.json') as f:
+        content_json = json.loads(f.read())
+    response = jsonify(content_json)
+    return response
+
+@app.route('/sdk/game/patch/resource/<filename>', methods=['GET'])
+def get_patch_game_src(filename):
+    with open('static/patch/Tyrantdb-iOS/game/{}.{}'.format(filename, 'js')) as f:
+        response = f.read();
+    return response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

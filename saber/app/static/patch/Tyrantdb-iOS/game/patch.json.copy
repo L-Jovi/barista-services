@@ -1,0 +1,15 @@
+{
+  "name": "patchTyrantdbGameTracker",
+  "version": "0.0.1",
+  "description": "patch js file serve for sdk that assist app",
+  "keywords": [
+    "JSPatch",
+    "TyrantdbGameTracker"
+  ],
+  "author": "xd",
+  "license": "MIT",
+  "homepage": "http://www.xd.com",
+  "devDependencies": {
+    "JSPatch": "0.1.5"
+  }
+}
