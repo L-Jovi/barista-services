@@ -39,27 +39,27 @@ def get_test_patch():
 
 @app.route('/sdk/db/patch/info', methods=['GET'])
 def get_patch_db_info():
-    with open('static/patch/Tyrantdb-iOS/db/patch.json') as f:
+    with open('static/patch/Tyrant/db/patchTyrantdb.json') as f:
         content_json = json.loads(f.read())
     response = jsonify(content_json)
     return response
 
 @app.route('/sdk/db/patch/resource/<filename>', methods=['GET'])
 def get_patch_db_src(filename):
-    with open('static/patch/Tyrantdb-iOS/db/{}.{}'.format(filename, 'js')) as f:
+    with open('static/patch/Tyrant/db/{}.{}'.format(filename, 'js')) as f:
         response = f.read();
     return response
 
 @app.route('/sdk/game/patch/info', methods=['GET'])
 def get_patch_game_info():
-    with open('static/patch/Tyrantdb-iOS/game/patch.json') as f:
+    with open('static/patch/Tyrant/game/patchTyrantdbGameTracker.json') as f:
         content_json = json.loads(f.read())
     response = jsonify(content_json)
     return response
 
 @app.route('/sdk/game/patch/resource/<filename>', methods=['GET'])
 def get_patch_game_src(filename):
-    with open('static/patch/Tyrantdb-iOS/game/{}.{}'.format(filename, 'js')) as f:
+    with open('static/patch/Tyrant/game/{}.{}'.format(filename, 'js')) as f:
         response = f.read();
     return response
 

@@ -1,9 +1,10 @@
-require('NSString, NSMutableString, NSNumber, NSUTF8StringEncoding');
+require('NSString, NSMutableString, NSNumber');
 require('NSDictionary, NSMutableDictionary');
 require('NSData, NSJSONSerialization, NSUserDefaults');
 require('NSURL, NSURLConnection, NSURLRequest, NSMutableURLRequest');
 require('NSNotificationCenter, NSInvocationOperation, NSOperationQueue');
 
+var NSUTF8StringEncoding = 4;
 
 var utils = {
     test_echo: function(){
@@ -40,6 +41,8 @@ var utils = {
 
 defineClass('Tyrantdb', {
     setAccount_module_catogery_debug: function(account, module, catogery, debug) {
+        console.log('🍮  enter JSPatch logic [setAccount]');
+
         /* args mapping type below */
         var jsAccount = account.toJS();
         var jsModule = module.toJS();
@@ -73,6 +76,18 @@ defineClass('Tyrantdb', {
         }
         if(jsModule || jsModule.length){
             utils['setter'](self, jsModule, '_module');
+        }
+
+        self.generateKey_catogery_debug(account, catogery, debug);
+        utils['setter'](self, self.generateKey_catogery_debug(account, catogery, debug), '_key');
+        utils['setter'](self, NSUserDefaults.standardUserDefaults(), '_userDefaults');
+
+        utils['setter'](self, NSOperationQueue.alloc().init(), '_queue');
+        utils['getter'](self, '_queue', 'default').setMaxConcurrentOperationCount(1);
+        utils['setter'](self, 0, '_errorCount');
+
+        if(!utils['getter'](self, '_userDefaults', 'default')){
+            console.log("tyrantdb: NSUserDefaults is not avaliable, some information will be lost.");
         }
 
         return true;
@@ -126,41 +141,25 @@ defineClass('Tyrantdb', {
     },
 
     sendTyrantdbJs_api: function(data, api) {
-        // I use origin [data] with suitable oc type
+        // pay attention to argument [data] type mapping [NSData]
         var _jsErrorCount = utils['getter'](self, '_errorCount', 'default');
         var jsApi = api.toJS();
 
-        //   var jsonData = NSData.alloc().init();
-        //   jsonData = NSJSONSerialization.dataWithJSONObject_options_error(data, 0, null);
-        //   console.log(typeof jsonData, jsonData);
-        //   if (null != jsonData) {
-        //       console.log('@@@');
-        //       var jsonString = NSString.alloc().initWithData_encoding(jsonData, NSUTF8StringEncoding);
-        //       console.log('###');
-        //       console.log(typeof tyrantdbHost, tyrantdbHost);
+        var jsonData = NSJSONSerialization.dataWithJSONObject_options_error(data, 0, null);
+        if(jsonData){
+            var jsonString = NSString.alloc().initWithData_encoding(jsonData, NSUTF8StringEncoding).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding);
+            var postString = jsonString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding).stringByReplacingOccurrencesOfString_withString('+', '%2B');
+            var postData = postString.dataUsingEncoding(NSUTF8StringEncoding);
+            var tyrantdbHost = self.tyrantdbHost();
+            var urlString = NSMutableString.alloc().initWithFormat("%s%s", tyrantdbHost, api);
+            var jsUrlString = urlString.toJS();
 
-        //       var postString = jsonString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding).stringByReplacingOccurrencesOfString_withString("+", "%2B");
-        //       var postData = postString.dataUsingEncoding(NSUTF8StringEncoding);
-
-        //       // var urlString = NSMutableString.alloc().initWithFormat(tyrantdbHost, api);
-        //       var urlString = NSMutableString.alloc();
-        //       urlString = tyrantdbHost + api;
-        //       console.log(typeof urlString, urlString);
-        //       var url = NSURL.alloc().initWithString(urlString);
-
-        //       var request = NSMutableURLRequest.alloc().initWithURL_cachePolicy_timeoutInterval(url, NSURLRequestReloadIgnoringLocalCacheData, 5);
-        //       request.setHTTPShouldHandleCookies(NO);
-        //       request.setHTTPBody(postData);
-        //       request.setHTTPMethod("POST");
-
-        //       var sendInfo = NSMutableDictionary.alloc().initWithCapacity(1);
-        //       sendInfo.setObject_forKey(request, "request");
-
-        //       return sendInfo;
-        //   }else{
-        //       NSLog("%", "tyrantdb: JSON encode error.");
-        //       return 0;
-        //   }
+            var url = NSURL.alloc().initWithString(urlString);
+            var request = NSMutableURLRequest.alloc().initWithURL_cachePolicy_timeoutInterval(url, NSURLRequestReloadIgnoringLocalCacheData, 5);
+            request.setHTTPShouldHandleCookies(false);
+            request.setHTTPBody(postData);
+            request.setHTTPMethod("POST");
+        }
     },
 
     identify_setProperties_setIp_setTimestamp: function(identify, properties, ip, timestamp) {
@@ -229,6 +228,8 @@ defineClass('Tyrantdb', {
     },
 
     blockedSend: function(sendInfo) {
+        console.log(' 👉  version db 0.0.2');
+
         // in view of aiming at oc type [NSMutableURLRequest] make no sense with [toJS()]
         // here I retain origin variable
         if (!sendInfo || !sendInfo.isKindOfClass(NSDictionary.class())) {
@@ -253,28 +254,5 @@ defineClass('Tyrantdb', {
         }
 
         return true;
-    }
-});
-
-
-defineClass('TyrantdbGameTracker', {}, {
-    testQueueJs_channel_debug_delegate: function(appId, channel, debug, delegate) {
-        /* set _queue */
-        _queue = NSOperationQueue.alloc().init();
-        _queue.setMaxConcurrentOperationCount(1);
-        _queue.addOperation(NSInvocationOperation.alloc().initWithTarget_selector_object(delegate, 'onStartOperation', null));
-
-        NSNotificationCenter.defaultCenter().addObserver_selector_name_object(delegate, "enterBackgroundOperation", "UIApplicationDidEnterBackgroundNotification", null);
-        
-        console.log('👉  version 0.0.2 👈  ');
-    },
-
-    setUserJs_userType_userSex_userAge_userName: function(userId, userType, userSex, userAge, userName) {
-        return {};
-    },
-
-    setLevel: function(level) {
-        var _jsTyrantdbUser = TyrantdbGameTracker.__tyrantdbUser();
-        return;
     }
 });
