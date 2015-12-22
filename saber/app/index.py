@@ -37,6 +37,7 @@ def get_test_patch():
     return response
 
 
+# stable version server
 @app.route('/sdk/db/patch/info', methods=['GET'])
 def get_patch_db_info():
     with open('static/patch/Tyrant/db/patchTyrantdb.json') as f:
@@ -62,6 +63,35 @@ def get_patch_game_src(filename):
     with open('static/patch/Tyrant/game/{}.{}'.format(filename, 'js')) as f:
         response = f.read();
     return response
+
+
+# current version server
+@app.route('/sdk/db/1.4/<jsonfile>', methods=['GET'])
+def get_beta_patch_db_info(jsonfile):
+    with open('static/patch/Tyrant/upyun/local/db/{}'.format(jsonfile)) as f:
+        content_json = json.loads(f.read())
+    response = jsonify(content_json)
+    return response
+
+@app.route('/db/<version>/patch/<filename>', methods=['GET'])
+def get_beta_patch_db_src(version, filename):
+    with open('static/patch/Tyrant/upyun/local/db/{}/{}'.format(version, filename)) as f:
+        response = f.read();
+    return response
+
+@app.route('/sdk/game/1.4/<jsonfile>', methods=['GET'])
+def get_beta_patch_game_info(jsonfile):
+    with open('static/patch/Tyrant/upyun/local/game/{}'.format(jsonfile)) as f:
+        content_json = json.loads(f.read())
+    response = jsonify(content_json)
+    return response
+
+@app.route('/game/<version>/patch/<filename>', methods=['GET'])
+def get_beta_patch_game_src(version, filename):
+    with open('static/patch/Tyrant/upyun/local/game/{}/{}'.format(version, filename)) as f:
+        response = f.read();
+    return response
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

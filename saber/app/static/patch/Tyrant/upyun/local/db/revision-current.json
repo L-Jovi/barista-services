@@ -1,0 +1,5 @@
+{
+  "remotePatchSrcBaseUrl": "http://172.26.129.189:5000/db/current/patch/patchTyrantdb.js",
+  "version": "1.4.2",
+  "remotePatchInfoUrl": "http://172.26.129.189:5000/sdk/db/1.4/revision-edge.json"
+}

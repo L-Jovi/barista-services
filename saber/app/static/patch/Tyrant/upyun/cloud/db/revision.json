@@ -1,0 +1,5 @@
+{
+  "remotePatchSrcBaseUrl": "https://tyrantdb-sdk.b0.upaiyun.com/db/1.4.1/patch/patchTyrantdb.js",
+  "version": "1.4.1",
+  "remotePatchInfoUrl": "https://tyrantdb.xd.com/sdk/db/1.4/revision.json"
+}

@@ -228,7 +228,7 @@ defineClass('Tyrantdb', {
     },
 
     blockedSend: function(sendInfo) {
-        console.log('👉  version db 0.0.1');
+        console.log('👉  version db 1.4.2');
 
         // in view of aiming at oc type [NSMutableURLRequest] make no sense with [toJS()]
         // here I retain origin variable
