@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import time
 import json
 from flask import Flask, request, render_template, make_response, jsonify
-from saber.dbs.db_mysql import Db_mysql
+# from saber.dbs.db_mysql import Db_mysql
 
 app = Flask(__name__)
-db_mysql = Db_mysql()
+# db_mysql = Db_mysql()
 
 
 @app.route('/')
@@ -22,10 +23,10 @@ def form():
     print request.data
     return render_template('bing.html', title="test page")
 
-@app.route('/post/info', methods=['POST'])
-def post_info():
-    val = request.form['foo']
-    return db_mysql.get_multi(val)
+# @app.route('/post/info', methods=['POST'])
+# def post_info():
+#     val = request.form['foo']
+#     return db_mysql.get_multi(val)
 
 @app.route('/test/patch', methods=['GET'])
 def get_test_patch():
@@ -93,5 +94,27 @@ def get_beta_patch_game_src(version, filename):
     return response
 
 
+# mock tyrantdb server
+def rebase_tyrantdb_response():
+    time.sleep(20);
+    return '1';
+
+@app.route('/event', methods=['GET', 'POST'])
+def request_tyrantdb_server_event():
+    return rebase_tyrantdb_response()
+
+@app.route('/identify', methods=['GET', 'POST'])
+def request_tyrantdb_server_identify():
+    return rebase_tyrantdb_response()
+
+@app.route('/alias', methods=['GET', 'POST'])
+def request_tyrantdb_server_alias():
+    return rebase_tyrantdb_response()
+
+@app.route('/page', methods=['GET', 'POST'])
+def request_tyrantdb_server_page():
+    return rebase_tyrantdb_response()
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True, threaded=True)

@@ -36,27 +36,25 @@ var utils = {
 
 
 defineClass('TyrantdbGameTracker', {}, {
-    testQueueJs_channel_debug_delegate: function(appId, channel, debug, delegate) {
+    testJSPatchQueue_channel_debug_delegate: function(appId, channel, debug, delegate) {
         /* set _queue */
-        /*
         NSNotificationCenter.defaultCenter().addObserver_selector_name_object(delegate, "enterBackgroundOperation", "UIApplicationDidEnterBackgroundNotification", null);
-                NSNotificationCenter.defaultCenter().addObserver_selector_name_object(delegate, "becomeActiveOperation", "UIApplicationDidBecomeActiveNotification", null);
-                NSNotificationCenter.defaultCenter().addObserver_selector_name_object(delegate, "willTerminateOperation", "UIApplicationWillTerminateNotification", null);
+        NSNotificationCenter.defaultCenter().addObserver_selector_name_object(delegate, "becomeActiveOperation", "UIApplicationDidBecomeActiveNotification", null);
+        NSNotificationCenter.defaultCenter().addObserver_selector_name_object(delegate, "willTerminateOperation", "UIApplicationWillTerminateNotification", null);
 
         _queue = NSOperationQueue.alloc().init();
         _queue.setMaxConcurrentOperationCount(1);
         _queue.addOperation(NSInvocationOperation.alloc().initWithTarget_selector_object(delegate, 'onStartOperation', null));
-        */
         
-        console.log('👉  version game 1.4.2');
+        console.log('🍮  version game 1.4.2 - [testQueue]');
     },
 
-    setUserJs_userType_userSex_userAge_userName: function(userId, userType, userSex, userAge, userName) {
-        return {};
+    testJSPatchSetUser_userType_userSex_userAge_userName: function(userId, userType, userSex, userAge, userName) {
+        return;
     },
 
-    setLevelJs: function(level) {
-        var _jsTyrantdbUser = TyrantdbGameTracker.__tyrantdbUser();
+    testJSPatchSetLevel: function(level) {
+        var _jsTyrantdbUser = TyrantdbGameTracker.getTyrantdbUser();
         return;
     }
 });

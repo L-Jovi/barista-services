@@ -5,6 +5,7 @@ require('NSURL, NSURLConnection, NSURLRequest, NSMutableURLRequest');
 require('NSNotificationCenter, NSInvocationOperation, NSOperationQueue');
 
 var NSUTF8StringEncoding = 4;
+var NSURLRequestReloadIgnoringLocalCacheData = 1;
 
 var utils = {
     test_echo: function(){
@@ -41,7 +42,7 @@ var utils = {
 
 defineClass('Tyrantdb', {
     setAccount_module_catogery_debug: function(account, module, catogery, debug) {
-        console.log('🍮  enter JSPatch logic [setAccount]');
+        console.log('🍮  version db 1.4.2 - [setAccount]');
 
         /* args mapping type below */
         var jsAccount = account.toJS();
@@ -57,11 +58,11 @@ defineClass('Tyrantdb', {
 
         if(!jsAccount || !jsAccount.length){
             console.log("tyrantdb: Account is empty, need a nonempty string.");
-            return false;
+            return;
         }
         if(!jsCatogery || !jsCatogery.length){
             console.log("tyrantdb: Catogery is empty, need a nonempty string.");
-            return false;
+            return;
         }
 
         if(jsDebug){
@@ -90,7 +91,7 @@ defineClass('Tyrantdb', {
             console.log("tyrantdb: NSUserDefaults is not avaliable, some information will be lost.");
         }
 
-        return true;
+        return;
     },
 
     event_setProperties_setIp_setTimestamp: function(name, properties, ip, timestamp) {
@@ -104,15 +105,15 @@ defineClass('Tyrantdb', {
 
         if(!_jsIndex){
             console.log("tyrantdb: Haven't set account yet, please call setAccount first.");
-            return false;
+            return;
         }
         if(!_jsIdentify){
             console.log("tyrantdb: Haven't set identify yet, please call autoIdentify or identify first.");
-            return false;
+            return;
         }
         if(!jsName || !jsName.length){
             console.log("tyrantdb: Name is empty, will do nothing.");
-            return false;
+            return;
         }
 
         var data = {
@@ -136,11 +137,9 @@ defineClass('Tyrantdb', {
         }
 
         self.sendTyrantdb_api(data, "event");
-
-        return data;
     },
 
-    sendTyrantdbJs_api: function(data, api) {
+    testJSPatchSendTyrantdb_api: function(data, api) {
         // pay attention to argument [data] type mapping [NSData]
         var _jsErrorCount = utils['getter'](self, '_errorCount', 'default');
         var jsApi = api.toJS();
@@ -150,7 +149,7 @@ defineClass('Tyrantdb', {
             var jsonString = NSString.alloc().initWithData_encoding(jsonData, NSUTF8StringEncoding).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding);
             var postString = jsonString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding).stringByReplacingOccurrencesOfString_withString('+', '%2B');
             var postData = postString.dataUsingEncoding(NSUTF8StringEncoding);
-            var tyrantdbHost = self.tyrantdbHost();
+            var tyrantdbHost = self.getTyrantdbHost();
             var urlString = NSMutableString.alloc().initWithFormat("%s%s", tyrantdbHost, api);
             var jsUrlString = urlString.toJS();
 
@@ -172,21 +171,21 @@ defineClass('Tyrantdb', {
         
         if(!_jsIndex){
             console.log("tyrantdb: Haven't set account yet, please call setAccount first.");
-            return false;
+            return;
         }
         if((!jsIdentify || !jsIdentify.length) && utils['isEmpty'](jsProperties) || !utils['getObjCount'](jsProperties)){
             console.log("tyrantdb: Identify and properties are both empty, will do nothing.");
-            return false;
+            return;
         }
         if((!jsIdentify || !jsIdentify.length) && !_jsIdentify){
             console.log("tyrantdb: Haven't set identify yet, please specify an identify first.");
-            return false;
+            return;
         }
 
         if(jsIdentify && jsIdentify.length){
             if(jsIdentify == _jsIdentify){
                 if(utils['isEmpty'](jsProperties) || !utils['getObjCount'](jsProperties)){
-                    return false;
+                    return;
                 }
             }else{
                 _jsIdentify = jsIdentify;
@@ -223,25 +222,24 @@ defineClass('Tyrantdb', {
         if(_jsModule){
             data.setObject_forKey(_jsModule, 'module');
         }
-
-        return data;
     },
 
-    blockedSend: function(sendInfo) {
-        console.log('👉  version db 1.4.2');
-
+    testJSPatchBlockedSend: function(sendInfo) {
         // in view of aiming at oc type [NSMutableURLRequest] make no sense with [toJS()]
         // here I retain origin variable
+
+        console.log('🍮  version db 1.4.2 - [blockedSend]');
+
         if (!sendInfo || !sendInfo.isKindOfClass(NSDictionary.class())) {
             console.log("tyrantdb: Non NSDictionary object given to send, will do nothing.");
-            return false;
+            return;
         }
 
         var info = sendInfo;
         var request = info.objectForKey('request');
         if(!request){
             console.log('tyrantdb: Invalid send info given to send, will do nothing.');
-            return false;
+            return;
         }
 
         var data = null;
@@ -252,7 +250,7 @@ defineClass('Tyrantdb', {
                 break;
             }
         }
-
-        return true;
+        
+        return;
     }
 });
