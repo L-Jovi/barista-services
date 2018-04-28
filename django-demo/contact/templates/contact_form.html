@@ -1,0 +1,80 @@
+<!-- 这里是我们自己实现的验证返回页面 很多代码 看着效果很不好
+
+<html>
+<head>
+    <title>Contact us</title>
+</head>
+<body>
+    <h1>Contact us</h1>
+
+    {% if errors %}
+        <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="/contact/" method="post">
+        <p>Subject: <input type="text" name="subject" value="{{ subject }}"></p>
+        <p>Your e-mail (optional): <input type="text" name="email" value="{{ email }}"></p>
+        <p>Message: <textarea name="message" rows="10" cols="50">{{ message }}</textarea></p>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html> 
+
+-->
+
+
+<!-- 这里通过 django forms 高级库返回一个填写了信息的实例对象 我们可以直接从模板中表现 -->
+<html>
+<head>
+    <title>Contact us</title>
+
+    <!-- 这里为了突出错误信息 我们用 css 修饰一些视觉效果 -->
+    <style type="text/css">
+        ul.errorlist {
+            margin: 0;
+            padding: 0;
+        }
+        .errorlist li {
+            background-color: red;
+            color: white;
+            display: block;
+            font-size: 10px;
+            margin: 0 0 3px;
+            padding: 4px 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contact us</h1>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+    <!-- 其实主角就是下面的代码啦 你在 shell 中 print forms 这个实例会发现 django 帮你做好了一个表单 -->
+    <form action="" method="post">
+        <div class="field">
+            {{ form.subject.errors }}
+            <label for="id_subject">Subject:</label>
+            {{ form.subject }}
+        </div>
+        <div class="field">
+            {{ form.email.errors }}
+            <label for="id_email">email-addr:</label>
+            {{ form.email }}
+        </div>
+        <div class="field">
+            {{ form.message.errors }}
+            <label for="id_message">Message:</label>
+            {{ form.message }}
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

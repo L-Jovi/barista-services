@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test2</title>
+</head>
+<body>
+    {{ user }} use {{ app }} from {{ ip_addr }}
+    <!-- 下面关闭了 django  自带的模板转义 现在我们把信任的 html 展示出来 -->
+    <p>{{ message | safe }}</p>
+
+    <!-- 这里我们使用自定义的模板语句 -->
+    {% load books_extras %}
+
+    {% autoescape off %}
+    {{ message | cut:" "}}
+    {{ message | low }}
+    {% endautoescape %}
+</body>
+</html>
