@@ -1,6 +1,6 @@
-# Exercide Django
+# Exercise Django
 
-Practice of Django step by step.
+Practice of Django service step by step.
 
 > use git to control per chapter of django book
 
