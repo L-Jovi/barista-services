@@ -1,0 +1,20 @@
+{
+  "name": "example-node-server",
+  "version": "1.0.0",
+  "description": "Example Node Server w/ Babel",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel lib -d dist",
+    "start": "yarn build && nodemon dist/index.js",
+    "serve": "yarn build && node dist/index.js",
+    "test": "yarn build && mocha --require @babel/register"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.17.5"
+  }
+}

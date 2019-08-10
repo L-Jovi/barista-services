@@ -4,7 +4,7 @@ __Notice__
 
   this server side with multi function and dep with python `virtualenv`
 
-### main task
+### Main Task
 
 1. in order to share `js` file for **iOS-client-side** to aim hot update
 
