@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  mysql:
+    image: nodered/node-red:latest
+    container_name: mynodered
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./data:/data
+    restart: always
