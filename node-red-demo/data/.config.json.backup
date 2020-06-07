@@ -409,6 +409,23 @@
      "file": "/data/node_modules/node-red-contrib-npm/npm/npm.js"
     }
    }
+  },
+  "node-red-contrib-lodash": {
+   "name": "node-red-contrib-lodash",
+   "version": "0.0.2",
+   "local": true,
+   "nodes": {
+    "lodash": {
+     "name": "lodash",
+     "types": [
+      "lodash"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-lodash",
+     "file": "/data/node_modules/node-red-contrib-lodash/lodash/lodash.js"
+    }
+   }
   }
  },
  "_credentialSecret": "457b460abe0a5d6099513e9a6bb175718f79abb0fd85e70625e5bbc31f0c0202",
@@ -421,7 +438,7 @@
      "view-grid-size": 20,
      "view-node-status": true,
      "view-node-show-label": true,
-     "view-show-tips": true
+     "view-show-tips": false
     }
    },
    "menu-menu-item-palette": true,
