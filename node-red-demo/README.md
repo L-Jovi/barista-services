@@ -202,6 +202,33 @@ Node-RED 提供针对不同原始数据结构类型的解析节点，如果有�
 
 - 日志处理
 
+  [官方文档 - 日志处理](https://nodered.org/docs/user-guide/runtime/logging)
+  
+  ```
+      logging: {
+        // Only console logging is currently supported
+        console: {
+            level: "debug",
+            // Whether or not to include metric events in the log output
+            metrics: true,
+            // Whether or not to include audit events in the log output
+            audit: false
+        },
+        myCustomLogger: {
+            level: 'debug',
+            metrics: true,
+            handler: function(settings) {
+                // Called when the logger is initialised
+                // Return the logging function
+                return function(msg) {
+                    console.log('custom logger::', msg.timestamp, msg.event);
+                }
+            }
+        }
+    },
+
+  ```
+
 ## 插件生态支持
 
 ### 模块化支持
