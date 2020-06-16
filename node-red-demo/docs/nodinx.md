@@ -2,6 +2,10 @@
 
 结合目前的 AISee 系统，大量业务处理渗透到 Java 服务中，系统中台 [Nodinx](http://nodinx.sparta.html5.qq.com/zh-cn/intro/index.html)（基于 EggJS 和 Koa.js 封装）一开始的设计旨在提供 HTTP 接入层，随着业务成长和迭代，自身作为业务中台的技术地位越来越明显。
 
+Nodinx 对 HTTP 请求依然延用 Koa.js 的洋葱圈模型处理。
+
+![](./imgs/model.png)
+
 那么目前的 AISee Nodinx 服务做了哪些事情
 
 1. [nodinx-cas](https://git.code.oa.com/WSRD-Tech-Center-Lib/nodinx-cas)
