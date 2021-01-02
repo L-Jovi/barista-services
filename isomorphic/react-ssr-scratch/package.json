@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "start:server": "rm -rf ./.build && webpack --config webpack.config.server.js",
+    "start:server": "rm -rf ./build && webpack --config webpack.config.server.js",
     "start:client": "webpack-dev-server --config webpack.config.client.js",
-    "start": "rm -rf ./.build && npm-run-all --parallel start:server start:client"
+    "build:client": "webpack --config webpack.config.client.js",
+    "start": "rm -rf ./build && npm-run-all --parallel start:server start:client"
   },
   "dependencies": {
     "babel-core": "^6.23.1",
@@ -20,4 +21,3 @@
     "webpack-node-externals": "^1.5.4"
   }
 }
-

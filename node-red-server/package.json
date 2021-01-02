@@ -1,5 +1,5 @@
 {
-  "name": "nodered",
+  "name": "node-red-server",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
