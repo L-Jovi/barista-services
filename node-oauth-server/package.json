@@ -1,5 +1,5 @@
 {
-  "name": "node-oauth-demo",
+  "name": "node-oauth-server",
   "version": "1.0.0",
   "description": "a demo of OAuth2.0 using node",
   "main": "index.js",

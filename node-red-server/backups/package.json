@@ -4,6 +4,7 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
-        "node-red-node-mysql": "~0.3.0"
+        "lodash": "^4.17.15",
+        "node-red-contrib-npm": "~1.0.2"
     }
 }
