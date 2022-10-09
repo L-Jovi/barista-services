@@ -90,8 +90,8 @@ export const LinkQuery = extendType({
                 });
 
                 const count = await context.prisma.link.count({ where });
-                const id = `main-feed:${JSON.stringify(args)}`;   
-                  
+                const id = `main-feed:${JSON.stringify(args)}`;
+
                 return {
                     links,
                     count,
