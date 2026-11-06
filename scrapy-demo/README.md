@@ -1,7 +1,5 @@
 # Exercise Scrapy
 
-Practice with scrapy that having familar structure with Django project.
+Scrapy exercises for learning how a crawler is organized and what each part does. The project layout will look familiar to readers who have used Django.
 
-> Version control by git tool and github offical.
-
-> Some practice of Scrapy that help me to figure out crawler's aim.
+The exercises are versioned with Git and kept on GitHub.

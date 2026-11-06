@@ -1,5 +1,5 @@
-##Notice
+## Notice
 
-1. dev respective `stable` js patch resouce
+Develop the JavaScript patches in the corresponding `stable` directory for `db` or `game`.
 
-2. when finished dev step, copy and take some change for other `current` and `edge` dir that making some difference
+When those changes are ready, copy the patches into the corresponding `current` and `edge` directories and apply the differences required by those versions. `localize.sh` records the copy and version-substitution steps used by this example; inspect those substitutions before running it.

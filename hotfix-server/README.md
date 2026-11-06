@@ -1,11 +1,9 @@
 ## Virtual env as server side
 
-__Notice__
-
-  this server side with multi function and dep with python `virtualenv`
+This directory contains a Python server exercise with two uses. Its environment is managed with Python `virtualenv`.
 
 ### Main Task
 
-1. in order to share `js` file for **iOS-client-side** to aim hot update
+1. Serve `js` patch files to an **iOS client** for hot updates.
 
-2. demo as identify sql injection and XSS display simple site
+2. Provide a small demonstration site for identifying SQL injection and XSS.
