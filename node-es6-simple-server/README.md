@@ -1,7 +1,7 @@
 ## ES6 Support Node Server
 
-Refer to smart [example-node-server](https://github.com/babel/example-node-server).
+This Node.js server exercise follows Babel's [example-node-server](https://github.com/babel/example-node-server) to use ES6 syntax on the server.
 
 ### Dependencies
 
-Take look of `package.json`.
+See `package.json` for the dependencies and scripts used by this example.

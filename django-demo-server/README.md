@@ -1,9 +1,9 @@
 # Exercise Django
 
-Practice of Django service step by step.
+Step-by-step Django service exercises following a Django book.
 
-> use git to control per chapter of django book
+Git history tracks the work by book chapter.
 
-Please remind the official website
+For Django's documentation and project information, see the official website:
 
 [https://www.djangoproject.com/](https://www.djangoproject.com/)
